@@ -1,0 +1,56 @@
+<!-- Convert Spanish characters to HTML Entity codes -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Character Encoder</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/he/1.2.0/he.min.js" integrity="sha512-PEsccDx9jqX6Dh4wZDCnWMaIO3gAaU0j46W//sSqQhUQxky6/eHZyeB3NrXD2xsyugAKd4KPiDANkcuoEa2JuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        .flex-row{
+            display: flex;
+            flex-direction: row;
+        }
+        .flex-1{
+            flex: 1;
+        }
+        textarea{
+            width: 100%;
+            height: 500px;
+        }
+        .original,.converted{
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-row">
+        <div class="original flex-1">
+            <textarea name="" id="original-text"></textarea>
+            <button class="convert-button">Convert</button>
+        </div>
+        <div class="converted flex-1">
+            <textarea name="" id="converted-text"></textarea>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            
+            $(".convert-button").off().on('click', function(){
+                var originalText = $('#original-text').val();
+                $('#converted-text').val(encode(originalText))
+            });
+        });
+
+        function encode(text){
+            const options = {
+                decimal: true
+            }
+            return he.encode(text, options);
+        }
+    </script>
+</body>
+</html>
